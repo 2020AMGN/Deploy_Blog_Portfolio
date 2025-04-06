@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 커스텀 회로 제작 서비스: 당신의 아이디어를 현실로!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- highlight.js 추가 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        /* 웹폰트 정의 */
+        @font-face {
+            font-family: 'KOHIBaeumOTF';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/KOHIBaeumOTF.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'NEXON Lv2 Gothic Medium';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/NEXON%20Lv2%20Gothic%20Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'GmarketSansTTFMedium';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/GmarketSansTTFMedium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'RIDIBatang';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/RIDIBatang.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'EliceDigitalCodingverH_Regular';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/EliceDigitalCodingverH_Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'RIDIBatang', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: left;
+            margin-bottom: 30px;
+            border-left: 4px solid #888;
+            padding-left: 15px;
+        }
+        
+        .header h1 {
+            font-family: 'KOHIBaeumOTF', sans-serif;
+            font-weight: 400;  /* 기본 두께 명시 */
+            font-style: normal;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .nav-link {
+            margin: 20px 0;
+            color: #666;
+        }
+        
+        h2 {
+            font-family: 'NEXON Lv2 Gothic Medium', sans-serif;
+            background-color: #fdd5f5;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 20px 0 15px;
+            font-size: 1.3em;
+        }
+        
+        h3 {
+            font-family: 'GmarketSansTTFMedium', sans-serif;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 15px 0 10px;
+            font-size: 1.1em;
+        }
+        
+        ul {
+            padding-left: 0;
+            list-style-type: none;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin: 8px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "-";
+            position: absolute;
+            left: 0;
+        }
+        
+        p {
+            margin: 10px 0;
+        }
+        
+        .numbered-title {
+            font-family: 'GmarketSansTTFMedium', sans-serif;
+            background-color: #fff8b2;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        code {
+            font-family: 'EliceDigitalCodingverH_Regular', monospace !important;
+        }
+        
+        pre code.hljs {
+            font-family: 'EliceDigitalCodingverH_Regular', monospace !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔥 ESP32 커스텀 회로 제작 서비스: 당신의 아이디어를 현실로!</h1>
+    </div>
+
+    <div class="section">
+        <p>안녕하세요, 아무고나제작소의 메이커고나입니다!<br><br>
+        오늘은 IoT 프로젝트의 핵심인 <strong>ESP32를 활용한 커스텀 회로 제작 서비스</strong>에 대해 소개해드리려고 합니다.<br>
+        개발보드로만 ESP32를 사용하고 계신가요? 이제 더 작고, 더 효율적인 맞춤형 솔루션으로 여러분의 아이디어를 실현해보세요! 💡</p>
+    </div>
+
+    <div class="nav-link">
+        <div style="display: flex; justify-content: center; gap: 30px; margin: 20px 0;">
+            <div style="text-align: center;">
+                <img src="ESP32_리튬이온배터리_회로.jpg" alt="ESP32와 리튬이온 배터리 연결 회로" style="max-width: 300px; height: auto;">
+                <p style="margin-top: 10px; font-size: 0.9em;">ESP32와 리튬이온 배터리 연결 회로</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📢 왜 ESP32 커스텀 회로가 필요한가요?</h2>
+        <p>개발 단계에서 NodeMCU나 DevKit과 같은 개발보드는 매우 편리합니다. 하지만 실제 제품으로 만들거나 공간이 제한된 프로젝트에서는 이런 개발보드가 너무 크고 불필요한 기능이 많을 수 있죠.</p><br>
+        <ul>
+            <li>✅ <strong>사이즈 최적화:</strong> 필요한 기능만 담아 제품 크기를 최소화</li>
+            <li>✅ <strong>전력 효율성:</strong> 불필요한 부품을 제거하여 배터리 수명 연장</li>
+            <li>✅ <strong>비용 절감:</strong> 대량 생산 시 개발보드보다 경제적</li>
+            <li>✅ <strong>제품 완성도:</strong> 전문적인 외관과 내구성 확보</li>
+            <li>✅ <strong>맞춤 기능:</strong> 필요한 센서와 인터페이스만 통합 가능</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>🌟 리튬이온 배터리와 ESP32의 완벽한 조합</h2><br>
+        
+        <p>ESP32는 WiFi와 Bluetooth 통신을 위해 순간적으로 높은 전류를 필요로 합니다. 특히 WiFi 통신 시에는 최대 300mA 이상의 전류가 소모될 수 있죠. 이런 요구사항을 안정적으로 충족시키기 위해서는 전문적인 배터리 관리 시스템(BMS)이 필요합니다.</p><br>
+        
+        <div class="numbered-title">💡 리튬이온 배터리 회로 설계의 핵심 요소</div>
+        <ul>
+            <li><strong>충전 컨트롤러:</strong> TP4056 등의 IC를 활용한 안전한 충전 회로</li>
+            <li><strong>방전 보호:</strong> 과방전 방지로 배터리 수명 연장</li>
+            <li><strong>전압 레귤레이터:</strong> ESP32에 안정적인 3.3V 공급</li>
+            <li><strong>전류 부스터:</strong> WiFi 통신 시 순간적인 높은 전류 지원</li>
+            <li><strong>상태 표시:</strong> LED 등을 통한 충전/방전 상태 시각화</li>
+        </ul><br>
+        
+        <div class="numbered-title">⚠️ 주의사항</div>
+        <ul>
+            <li>리튬이온 배터리는 잘못 다루면 화재나 폭발의 위험이 있습니다</li>
+            <li>전문적인 설계와 보호 회로가 반드시 필요합니다!</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>🔧 아무고나제작소의 ESP32 커스텀 회로 제작 서비스</h2>
+        
+        <p>아무고나제작소에서는 ESP32를 활용한 커스텀 회로 제작 서비스를 제공합니다. 단순히 개발보드를 사용하는 것이 아닌, 여러분의 제품에 최적화된 회로를 설계하고 제작해드립니다.</p><br>
+        
+        <div class="numbered-title">🌟 회로-제작-서비스-프로세스</div>
+        <ul>
+            <li>1. <strong>요구사항 분석:</strong> 프로젝트의 목적, 필요 기능, 사이즈 제한 등 파악</li>
+            <li>2. <strong>회로 구성요소 설계 (schematic):</strong> 요구사항에 맞는 회로도 작성 및 검토</li>
+            <li>3. <strong>2D 및 3D CAD 설계:</strong> 결합 및 공간적 제한이 있는 경우 조건에 맞춰서 회로 결합 및 외부라인 설계</li>
+            <li>4. <strong>회로 구성요소 배치 및 연결 (Artwork):</strong> PCB 설계 및 부품 배치</li>
+            <li>5. <strong>부품 최적화:</strong> 양산 및 제품 실장을 위한 부품 최적화</li>
+            <li>6. <strong>프로토타입 제작:</strong> 초기 테스트를 위한 PCB 제작 및 부품 실장</li>
+            <li>7. <strong>테스트 및 검증:</strong> 모든 기능 테스트 및 안정성 검증</li>
+            <li>8. <strong>회로기판 양산:</strong> 완성된 제품을 원하는 갯수만큼 생산</li>
+            <li>9. <strong>인증 서비스:</strong> 제품 KC 및 CE 인증 관련 서류 준비</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>⚡ ESP32 기반 IoT 센서 노드 예제 코드</h2>
+        <pre><code class="language-cpp">#include <WiFi.h>
+#include <PubSubClient.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+
+// WiFi 및 MQTT 설정
+const char* ssid = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+const char* mqtt_server = "YOUR_MQTT_SERVER";
+
+// 센서 설정
+#define DHTPIN 4
+#define DHTTYPE DHT22
+DHT dht(DHTPIN, DHTTYPE);
+
+// 배터리 모니터링 설정
+#define VBAT_PIN 35
+#define BATTERY_LOW_THRESHOLD 3.3
+
+// LED 설정
+#define STATUS_LED 2
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(STATUS_LED, OUTPUT);
+  dht.begin();
+  
+  // WiFi 연결
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    digitalWrite(STATUS_LED, !digitalRead(STATUS_LED));
+    delay(500);
+    Serial.print(".");
+  }
+  
+  // MQTT 서버 설정
+  client.setServer(mqtt_server, 1883);
+  
+  Serial.println("IoT 센서 노드 초기화 완료!");
+}
+
+void loop() {
+  // MQTT 연결 확인 및 재연결
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+  
+  // 배터리 전압 측정
+  float battery = analogRead(VBAT_PIN) * 2 * 3.3 / 4095;
+  
+  // 센서 데이터 측정
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+  
+  // 데이터 전송
+  if (!isnan(temperature) && !isnan(humidity)) {
+    char msg[50];
+    sprintf(msg, "{\"temp\":%.1f,\"hum\":%.1f,\"bat\":%.2f}", 
+            temperature, humidity, battery);
+    
+    client.publish("sensors/environment", msg);
+    
+    // 배터리 부족 경고
+    if (battery < BATTERY_LOW_THRESHOLD) {
+      client.publish("sensors/alerts", "Low battery");
+    }
+  }
+  
+  // 저전력 모드로 전환하여 배터리 절약
+  Serial.println("데이터 전송 완료. 절전 모드로 전환합니다...");
+  digitalWrite(STATUS_LED, LOW);
+  esp_sleep_enable_timer_wakeup(300 * 1000000); // 5분 후 깨어남
+  esp_deep_sleep_start();
+}</code></pre><br>
+    </div>
+
+    <div class="section">
+        <h2>✨ 적용 가능한 프로젝트 예시</h2><br>
+        
+        <div class="numbered-title">1. 🏠 웨어러블 디바이스</div>
+        <ul>
+            <li>작은 크기와 배터리 효율이 중요한 웨어러블 기기</li>
+            <li>건강 모니터링 센서와 통합</li>
+            <li>모바일 앱 연동 기능</li>
+        </ul><br>
+
+        <div class="numbered-title">2. 🌱 환경 모니터링 시스템</div>
+        <ul>
+            <li>원격지에서 장시간 동작해야 하는 배터리 구동 센서</li>
+            <li>클라우드 연동 데이터 수집</li>
+            <li>태양광 충전 시스템 통합 가능</li>
+        </ul><br>
+
+        <div class="numbered-title">3. 🏭 스마트홈 기기</div>
+        <ul>
+            <li>안정적인 WiFi 연결과 배터리 백업이 필요한 제품</li>
+            <li>음성 제어 시스템 통합</li>
+            <li>저전력 장기 사용 옵션</li>
+        </ul><br>
+        
+        <div class="numbered-title">4. 🚁 로봇 및 드론</div>
+        <ul>
+            <li>경량화가 중요한 이동형 디바이스</li>
+            <li>실시간 센서 데이터 처리</li>
+            <li>고효율 배터리 관리 시스템</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>💡 아무고나제작소 커스텀 회로 서비스의 장점</h2>
+        
+        <div class="numbered-title">🔥 전문적인 서비스</div>
+        <ul>
+            <li><strong>원스톱 솔루션:</strong> 회로 설계부터 제작, 펌웨어 개발까지 모든 과정 지원</li>
+            <li><strong>경험과 전문성:</strong> 다양한 IoT 프로젝트 경험 보유</li>
+            <li><strong>유연한 협업:</strong> 개발 과정에서 지속적인 피드백과 수정 가능</li>
+            <li><strong>비용 효율성:</strong> 필요한 기능에 최적화된 설계로 비용 절감</li>
+            <li><strong>지속적인 지원:</strong> 제품 개발 이후에도 유지보수 및 업그레이드 지원</li>
+        </ul><br>
+        
+        <div class="numbered-title">⚠️ ESP32 회로 설계 시 고려사항</div>
+        <ul>
+            <li><strong>전력 소비:</strong> WiFi 및 블루투스 모듈은 전력 소모가 큽니다</li>
+            <li><strong>안테나 설계:</strong> 통신 성능을 위한 적절한 안테나 설계 필요</li>
+            <li><strong>방열:</strong> 고성능 작업 시 열 관리 고려</li>
+            <li><strong>노이즈 관리:</strong> 디지털/아날로그 회로 간 간섭 최소화</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <p>💡 <strong>마무리</strong><br>
+        ESP32를 활용한 커스텀 회로는 아이디어를 더 완성도 높은 제품으로 만드는 핵심입니다.<br>
+        단순히 개발보드를 사용하는 것보다 더 작고, 더 효율적이며, 더 전문적인 결과물을 원하신다면 아무고나제작소에 문의해주세요!</p><br>
+        
+        <p>다음 글에서는 ESP32를 활용한 실제 프로젝트 사례와 펌웨어 개발 팁에 대해 더 자세히 알아보겠습니다.<br>
+        메이커고나였습니다! 👋</p><br>
+    </div>
+
+    <div class="section">
+        <h3>- 고정태그</h3>
+        <p>#아무고나제작소 #메이커고나 #상상을현실로 #시제품제작 #제품개발 #수원 #영통 #수원시제품제작 #영통시제품제작 #실험실 #연구실 #창의적종합설계</p><br>
+        
+        <h3>- 내용태그</h3>
+        <p>#ESP32 #IoT #임베디드시스템 #PCB설계 #리튬이온배터리 #WiFi #커스텀회로 #하드웨어개발 #프로토타입 #블루투스 #BMS #배터리관리시스템 #무선통신 #소형화 #전력효율화 #웨어러블 #맞춤형솔루션 #개발보드 #스마트홈 #환경모니터링</p>
+    </div>
+</body>
+</html>

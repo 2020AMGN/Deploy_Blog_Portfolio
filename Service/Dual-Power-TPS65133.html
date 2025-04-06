@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPS65133 양음전원 레귤레이터: 아날로그 회로의 핵심 전원 솔루션!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- highlight.js 추가 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        /* 웹폰트 정의 */
+        @font-face {
+            font-family: 'KOHIBaeumOTF';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/KOHIBaeumOTF.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'NEXON Lv2 Gothic Medium';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/NEXON%20Lv2%20Gothic%20Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'GmarketSansTTFMedium';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/GmarketSansTTFMedium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'RIDIBatang';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/RIDIBatang.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'EliceDigitalCodingverH_Regular';
+            src: url('https://raw.githubusercontent.com/2020AMGN/gonafont/main/font/EliceDigitalCodingverH_Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'RIDIBatang', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: left;
+            margin-bottom: 30px;
+            border-left: 4px solid #888;
+            padding-left: 15px;
+        }
+        
+        .header h1 {
+            font-family: 'KOHIBaeumOTF', sans-serif;
+            font-weight: 400;  /* 기본 두께 명시 */
+            font-style: normal;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .nav-link {
+            margin: 20px 0;
+            color: #666;
+        }
+        
+        h2 {
+            font-family: 'NEXON Lv2 Gothic Medium', sans-serif;
+            background-color: #fdd5f5;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 20px 0 15px;
+            font-size: 1.3em;
+        }
+        
+        h3 {
+            font-family: 'GmarketSansTTFMedium', sans-serif;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 15px 0 10px;
+            font-size: 1.1em;
+        }
+        
+        ul {
+            padding-left: 0;
+            list-style-type: none;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin: 8px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "-";
+            position: absolute;
+            left: 0;
+        }
+        
+        p {
+            margin: 10px 0;
+        }
+        
+        .numbered-title {
+            font-family: 'GmarketSansTTFMedium', sans-serif;
+            background-color: #fff8b2;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        code {
+            font-family: 'EliceDigitalCodingverH_Regular', monospace !important;
+        }
+        
+        pre code.hljs {
+            font-family: 'EliceDigitalCodingverH_Regular', monospace !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔥 TPS65133 양음전원 레귤레이터: 아날로그 회로의 핵심 전원 솔루션!</h1>
+    </div>
+
+    <div class="section">
+        <p>안녕하세요, 아무고나제작소의 메이커고나입니다!<br><br>
+        오늘은 아날로그 회로 설계에서 중요한 역할을 하는 <strong>양음 전원 레귤레이터 TPS65133</strong>에 대해 알아보고, 이를 활용한 맞춤형 개발보드 제작 서비스에 대해 소개해드리려고 합니다!<br>
+        정밀한 ±전원 공급으로 당신의 프로젝트 성능을 극대화하세요! 💡</p>
+    </div>
+
+    <div class="nav-link">
+        <div style="display: flex; justify-content: center; gap: 30px; margin: 20px 0;">
+            <div style="text-align: center;">
+                <img src="Dual-Power-TPS65133.png" alt="TPS65133 개발보드" style="max-width: 300px; height: auto;">
+                <p style="margin-top: 10px; font-size: 0.9em;">TPS65133 개발보드</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📢 양음 전원이 필요한 이유는 무엇인가요?</h2>
+        <p>많은 전자 회로는 단일 전원(VCC와 GND)만으로도 충분히 동작합니다. 하지만 OP-AMP나 일부 센서, 액추에이터 같은 아날로그 회로는 양전원(+V)과 음전원(-V)이 모두 필요한 경우가 많습니다. 이런 양음 전원이 필요한 이유는 무엇일까요?</p><br>
+        <ul>
+            <li>✅ <strong>신호의 양방향 스윙:</strong> 0V를 중심으로 양쪽으로 신호가 변화하는 아날로그 신호 처리 가능</li>
+            <li>✅ <strong>신호 왜곡 감소:</strong> DC 바이어스 없이 신호를 처리하여 왜곡 최소화</li>
+            <li>✅ <strong>다이나믹 레인지 확장:</strong> 단일 전원 대비 2배의 신호 범위 확보</li>
+            <li>✅ <strong>OP-AMP 성능 최적화:</strong> 대부분의 OP-AMP는 양음 전원에서 최적 성능 발휘</li>
+            <li>✅ <strong>정밀 센서 구동:</strong> 자이로스코프, 로드셀 등 고정밀 센서의 안정적 구동</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>💡 TPS65133이란 무엇인가요?</h2><br>
+        
+        <p>TPS65133은 텍사스 인스트루먼트(TI)에서 제조하는 고효율 양음 전원 레귤레이터 IC입니다. 단일 전원에서 양전압과 음전압을 동시에 생성할 수 있어, 이중 전원이 필요한 아날로그 회로 설계에 이상적인 부품입니다.</p><br>
+        
+        <div class="numbered-title">🌟 TPS65133의 주요 특징</div>
+        <ul>
+            <li><strong>단일 전원에서 양음 전원 생성:</strong> 배터리나 USB와 같은 단일 전원으로부터 ±5V 공급 가능</li>
+            <li><strong>고효율 스위칭 방식:</strong> 최대 90% 이상의 전력 변환 효율</li>
+            <li><strong>낮은 리플:</strong> 정밀한 아날로그 회로에 적합한 낮은 출력 리플</li>
+            <li><strong>소형 패키지:</strong> 작은 크기로 공간 제약이 있는 설계에 적합</li>
+            <li><strong>과전류/과열 보호:</strong> 내장된 보호 회로로 안정성 보장</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>🔧 TPS65133의 활용 분야</h2>
+        
+        <p>TPS65133은 양음 전원이 필요한 다양한 애플리케이션에 활용됩니다:</p><br>
+        
+        <div class="numbered-title">🔹 OP-AMP 기반 회로</div>
+        <ul>
+            <li>정밀 신호 증폭기</li>
+            <li>능동 필터 회로</li>
+            <li>오디오 전치 증폭기</li>
+            <li>계측용 증폭기</li>
+        </ul><br>
+        
+        <div class="numbered-title">🔹 센서 인터페이스</div>
+        <ul>
+            <li>브리지 형태의 센서 (로드셀, 압력센서)</li>
+            <li>차동 출력 센서</li>
+            <li>고정밀 측정 장비</li>
+            <li>바이오 시그널 측정 회로</li>
+        </ul><br>
+        
+        <div class="numbered-title">🔹 액추에이터 구동</div>
+        <ul>
+            <li>피에조 액추에이터</li>
+            <li>정밀 모터 제어</li>
+            <li>전압 제어 오실레이터</li>
+            <li>아날로그 스위치 드라이버</li>
+        </ul><br>
+        
+        <div class="numbered-title">🔹 데이터 변환 회로</div>
+        <ul>
+            <li>ADC/DAC 레퍼런스 및 구동 회로</li>
+            <li>아날로그 신호 컨디셔닝</li>
+            <li>복잡한 신호 처리 시스템</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>💡 TPS65133 회로 설계 시 고려사항</h2>
+        
+        <p>TPS65133을 활용한 회로 설계 시 주의해야 할 사항들이 있습니다:</p><br>
+        
+        <div class="nav-link">
+            <div style="display: flex; justify-content: center; gap: 30px; margin: 20px 0;">
+                <div style="text-align: center;">
+                    <img src="Dual-Power-TPS65133_Artwork.jpg" alt="TPS65133 회로도" style="max-width: 300px; height: auto;">
+                    <p style="margin-top: 10px; font-size: 0.9em;">TPS65133 회로도</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="numbered-title">⚠️ 인덕터 선택</div>
+        <ul>
+            <li>권장 인덕터 값 (보통 2.2µH~4.7µH) 사용</li>
+            <li>충분한 전류 용량을 가진 인덕터 선택</li>
+            <li>저항이 낮은 인덕터 사용으로 효율 극대화</li>
+        </ul><br>
+
+        <div class="numbered-title">⚠️ 출력 커패시터</div>
+        <ul>
+            <li>낮은 ESR 값을 가진 세라믹 커패시터 사용</li>
+            <li>출력 리플 감소를 위한 적절한 용량 선택</li>
+            <li>안정성 확보를 위한 올바른 배치</li>
+        </ul><br>
+
+        <div class="numbered-title">⚠️ 열 관리</div>
+        <ul>
+            <li>고전류 애플리케이션에서 방열 설계 고려</li>
+            <li>방열 패드와 비아를 통한 열 분산</li>
+            <li>최대 부하 조건에서의 열 성능 테스트</li>
+        </ul><br>
+        
+        <div class="numbered-title">⚠️ EMI/노이즈 고려</div>
+        <ul>
+            <li>스위칭 노이즈 최소화를 위한 PCB 레이아웃 최적화</li>
+            <li>입출력 필터 추가 고려</li>
+            <li>민감한 아날로그 회로와 분리 배치</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>⚡ TPS65133 활용 아두이노 코드 예시</h2>
+        <pre><code class="language-cpp">#include &lt;Arduino.h&gt;
+
+// TPS65133 컨트롤 핀 정의
+#define TPS65133_EN_PIN 9     // TPS65133 Enable 핀
+#define POSITIVE_SENSE_PIN A0  // 양전압 감지 핀
+#define NEGATIVE_SENSE_PIN A1  // 음전압 감지 핀
+#define LOAD_CONTROL_PIN 10    // 부하 제어 핀
+
+// 전압 모니터링 상수
+const float R1 = 10000.0;      // 전압 분배기 상단 저항 (10K)
+const float R2 = 10000.0;      // 전압 분배기 하단 저항 (10K)
+const float VREF = 3.3;        // ADC 레퍼런스 전압
+const float ADC_RESOLUTION = 1023.0; // 10비트 ADC
+
+// 상태 변수
+float positiveVoltage = 0.0;
+float negativeVoltage = 0.0;
+bool powerGood = false;
+
+void setup() {
+  Serial.begin(115200);
+  
+  // 핀 설정
+  pinMode(TPS65133_EN_PIN, OUTPUT);
+  pinMode(LOAD_CONTROL_PIN, OUTPUT);
+  
+  // 초기 상태
+  digitalWrite(TPS65133_EN_PIN, LOW);  // TPS65133 비활성화
+  digitalWrite(LOAD_CONTROL_PIN, LOW); // 부하 비활성화
+  
+  Serial.println("TPS65133 양음전원 모니터링 시작");
+  delay(1000);
+  
+  // TPS65133 활성화
+  digitalWrite(TPS65133_EN_PIN, HIGH);
+  Serial.println("TPS65133 활성화 - 안정화 대기 중...");
+  delay(100); // 전원 안정화 대기
+  
+  // 초기 전압 확인
+  checkVoltages();
+}
+
+void loop() {
+  // 전압 측정
+  checkVoltages();
+  
+  // 출력 전압 상태 표시
+  Serial.print("양전압: ");
+  Serial.print(positiveVoltage, 2);
+  Serial.print("V, 음전압: ");
+  Serial.print(negativeVoltage, 2);
+  Serial.print("V, 상태: ");
+  
+  if (powerGood) {
+    Serial.println("정상");
+    digitalWrite(LOAD_CONTROL_PIN, HIGH); // 부하 활성화
+  } else {
+    Serial.println("비정상 - 전압 확인 필요");
+    digitalWrite(LOAD_CONTROL_PIN, LOW);  // 부하 비활성화
+  }
+  
+  // 전원 상태 테스트 (부하 변동 시뮬레이션)
+  if (millis() % 10000 < 8000) {  // 8초 켜고 2초 끔
+    if (!powerGood) {
+      Serial.println("전원 재활성화 시도...");
+      digitalWrite(TPS65133_EN_PIN, LOW);
+      delay(500);
+      digitalWrite(TPS65133_EN_PIN, HIGH);
+      delay(100);
+    }
+  }
+  
+  delay(1000);  // 1초 간격으로 모니터링
+}
+
+void checkVoltages() {
+  // ADC 값 읽기
+  int positiveRaw = analogRead(POSITIVE_SENSE_PIN);
+  int negativeRaw = analogRead(NEGATIVE_SENSE_PIN);
+  
+  // 전압 계산 (전압 분배기 보정)
+  // 양전압은 직접 계산
+  positiveVoltage = (positiveRaw / ADC_RESOLUTION) * VREF * ((R1 + R2) / R2);
+  
+  // 음전압은 반전 계산 필요 (0V 기준이 ADC_RESOLUTION/2)
+  float negativeSense = (negativeRaw / ADC_RESOLUTION) * VREF;
+  negativeVoltage = -((1.65 - negativeSense) * ((R1 + R2) / R2) * 2);
+  
+  // 전원 상태 확인 (±5V 기준으로 10% 오차 허용)
+  powerGood = (positiveVoltage > 4.5 && positiveVoltage < 5.5 && 
+               negativeVoltage < -4.5 && negativeVoltage > -5.5);
+}</code></pre><br>
+    </div>
+
+    <div class="section">
+        <h2>✨ TPS65133 개발보드 활용 예시</h2><br>
+        
+        <div class="numbered-title">1. 🎵 오디오 시스템</div>
+        <ul>
+            <li>고품질 헤드폰 앰프</li>
+            <li>프리앰프 및 믹서</li>
+            <li>오디오 필터 및 이퀄라이저</li>
+            <li>마이크 프리앰프</li>
+        </ul><br>
+
+        <div class="numbered-title">2. 🔬 계측 시스템</div>
+        <ul>
+            <li>정밀 센서 인터페이스</li>
+            <li>데이터 로거</li>
+            <li>신호 컨디셔닝 회로</li>
+            <li>프로브 및 측정기</li>
+        </ul><br>
+
+        <div class="numbered-title">3. 💊 의료 장비</div>
+        <ul>
+            <li>생체 신호 측정기</li>
+            <li>의료용 센서 인터페이스</li>
+            <li>환자 모니터링 시스템</li>
+            <li>의료 영상 처리 시스템</li>
+        </ul><br>
+        
+        <div class="numbered-title">4. 🏭 산업용 제어 시스템</div>
+        <ul>
+            <li>PLC 아날로그 모듈</li>
+            <li>프로세스 제어 인터페이스</li>
+            <li>모터 드라이버</li>
+            <li>산업용 센서 네트워크</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <h2>🌟 아무고나제작소의 TPS65133 맞춤형 개발보드 서비스</h2>
+        
+        <div class="nav-link">
+            <div style="display: flex; justify-content: center; gap: 30px; margin: 20px 0;">
+                <div style="text-align: center;">
+                    <img src="tps65133_custom_board.jpg" alt="TPS65133 개발보드 컨셉" style="max-width: 300px; height: auto;">
+                    <p style="margin-top: 10px; font-size: 0.9em;">TPS65133 개발보드 컨셉</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="numbered-title">💡 맞춤형 설계 가능 항목</div>
+        <ul>
+            <li><strong>입력 전압 범위 조정:</strong> 배터리, USB, 12V 어댑터 등 다양한 입력 소스 지원</li>
+            <li><strong>출력 전압 설정:</strong> 표준 ±5V 외에도 ±12V, ±15V 등 맞춤 설정</li>
+            <li><strong>전류 용량 최적화:</strong> 애플리케이션에 필요한 전류 용량에 맞게 설계</li>
+            <li><strong>폼팩터 최적화:</strong> 공간 제약에 맞는 크기와 형태로 제작</li>
+            <li><strong>추가 기능 통합:</strong> 전압 모니터링, 과전류 보호 등 부가 기능 추가</li>
+        </ul><br>
+        
+        <div class="numbered-title">🌟 개발 프로세스</div>
+        <ul>
+            <li>1. <strong>요구사항 분석:</strong> 필요한 전압, 전류, 크기, 추가 기능 등 파악</li>
+            <li>2. <strong>회로 설계:</strong> 요구사항에 맞는 최적의 회로 설계</li>
+            <li>3. <strong>시뮬레이션:</strong> SPICE 시뮬레이션을 통한 회로 성능 검증</li>
+            <li>4. <strong>PCB 설계:</strong> 효율과 노이즈를 고려한 최적의 PCB 레이아웃</li>
+            <li>5. <strong>프로토타입 제작:</strong> 초기 샘플 제작 및 테스트</li>
+            <li>6. <strong>성능 테스트:</strong> 출력 전압/전류, 리플, 효율, 열 성능 등 검증</li>
+            <li>7. <strong>최종 제품화:</strong> 검증된 설계를 바탕으로 최종 제품 제작</li>
+        </ul><br>
+    </div>
+
+    <div class="section">
+        <p>💡 <strong>마무리</strong><br>
+        TPS65133 양음전원 레귤레이터는 정밀한 아날로그 회로 설계의 핵심입니다.<br>
+        아무고나제작소는 고객의 요구사항에 맞춘 최적의 전원 솔루션을 제공하여 프로젝트의 성능과 신뢰성을 높여드립니다.</p><br>
+        
+        <p>원하는 기능과 사양을 갖춘 맞춤형 TPS65133 개발보드가 필요하신가요? 아무고나제작소에서는 어떤 요구사항이라도 고객 맞춤형 솔루션을 제공해드립니다. 언제든지 문의주세요!<br><br>
+        다음 글에서는 TPS65133을 활용한 정밀 센서 인터페이스 구축 방법에 대해 더 자세히 알아보겠습니다.<br>
+        메이커고나였습니다! 👋</p><br>
+    </div>
+
+    <div class="section">
+        <h3>- 고정태그</h3>
+        <p>#아무고나제작소 #상상을현실로 #시제품제작 #제품개발 #수원 #영통 #수원시제품제작 #영통시제품제작 #실험실 #연구실 #창의적종합설계</p><br>
+        
+        <h3>- 내용태그</h3>
+        <p>#TPS65133 #양음전원 #양전압음전압 #DC-DC컨버터 #레귤레이터 #OPAMP전원 #아날로그회로 #PCB설계 #맞춤형개발보드 #전원회로 #센서인터페이스 #계측장비 #오디오회로 #의료기기전원 #정밀전원장치 #스위칭레귤레이터 #아날로그설계 #전원설계 #듀얼레일전원 #임베디드시스템</p>
+    </div>
+</body>
+</html>
