@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCB 프로젝트 목록</title>
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .project-list {
+            list-style: none;
+            padding: 0;
+        }
+        .project-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .project-item a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2em;
+        }
+        .project-item a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>PCB 프로젝트 문서</h1>
+    <ul id="project-list" class="project-list">
+        <!-- 여기에 프로젝트가 자동으로 추가됩니다 -->
+    </ul>
+
+    <script>
+        const username = '2020amgn';
+        const repo = 'Deploy_Blog_Portfolio';
+        const path = 'Service';
+
+        fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+            .then(response => response.json())
+            .then(data => {
+                const htmlFiles = data.filter(file => file.name.endsWith('.html'));
+                
+                htmlFiles.forEach(file => {
+                    // HTML 파일을 가져와서 제목 추출
+                    fetch(file.download_url)
+                        .then(response => response.text())
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const title = doc.querySelector('title').textContent || file.name;
+                            
+                            // 목록에 추가
+                            addToList(file.path, title);
+                        });
+                });
+            });
+
+        function addToList(path, title) {
+            const projectList = document.getElementById('project-list');
+            const listItem = document.createElement('li');
+            listItem.className = 'project-item';
+            
+            const link = document.createElement('a');
+            link.href = path;
+            link.textContent = title;
+            
+            listItem.appendChild(link);
+            projectList.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>
