@@ -29,41 +29,70 @@
         .project-item a:hover {
             color: #007bff;
         }
+        .folder-title {
+            margin-top: 30px;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>PCB 프로젝트 문서</h1>
-    <ul id="project-list" class="project-list">
-        <!-- 여기에 프로젝트가 자동으로 추가됩니다 -->
+    
+    <h2 class="folder-title">Service</h2>
+    <ul id="service-list" class="project-list">
+        <!-- Service 폴더 프로젝트가 자동으로 추가됩니다 -->
+    </ul>
+    
+    <h2 class="folder-title">PCB-Component</h2>
+    <ul id="pcb-component-list" class="project-list">
+        <!-- PCB-Component 폴더 프로젝트가 자동으로 추가됩니다 -->
     </ul>
 
     <script>
         const username = '2020amgn';
         const repo = 'Deploy_Blog_Portfolio';
-        const path = 'Service';
-
-        fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
-            .then(response => response.json())
-            .then(data => {
-                const htmlFiles = data.filter(file => file.name.endsWith('.html'));
-                
-                htmlFiles.forEach(file => {
-                    // HTML 파일을 가져와서 제목 추출
-                    fetch(file.download_url)
-                        .then(response => response.text())
-                        .then(html => {
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(html, 'text/html');
-                            const title = doc.querySelector('title').textContent || file.name;
-                            
-                            // 목록에 추가
-                            addToList(file.path, title);
-                        });
+        const folders = ['Service', 'PCB-Component'];
+        
+        // 각 폴더의 내용을 가져오는 함수
+        function fetchFolderContents(folder) {
+            return fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`폴더를 찾을 수 없습니다: ${folder}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const htmlFiles = data.filter(file => file.name.endsWith('.html'));
+                    
+                    const promises = htmlFiles.map(file => {
+                        return fetch(file.download_url)
+                            .then(response => response.text())
+                            .then(html => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                const title = doc.querySelector('title')?.textContent || file.name;
+                                
+                                return {
+                                    path: file.path,
+                                    title: title
+                                };
+                            });
+                    });
+                    
+                    return Promise.all(promises);
+                })
+                .catch(error => {
+                    console.error(`오류 발생: ${error.message}`);
+                    return []; // 오류 발생 시 빈 배열 반환
                 });
-            });
-
-        function addToList(path, title) {
-            const projectList = document.getElementById('project-list');
+        }
+        
+        // 목록에 항목을 추가하는 함수
+        function addToList(listId, path, title) {
+            const projectList = document.getElementById(listId);
             const listItem = document.createElement('li');
             listItem.className = 'project-item';
             
@@ -74,6 +103,23 @@
             listItem.appendChild(link);
             projectList.appendChild(listItem);
         }
+        
+        // 모든 폴더 처리
+        folders.forEach(folder => {
+            const listId = folder.toLowerCase().replace('-', '-') + '-list';
+            
+            fetchFolderContents(folder)
+                .then(files => {
+                    if (files.length === 0) {
+                        const projectList = document.getElementById(listId);
+                        projectList.innerHTML = '<p>이 폴더에 HTML 파일이 없습니다.</p>';
+                    } else {
+                        files.forEach(file => {
+                            addToList(listId, file.path, file.title);
+                        });
+                    }
+                });
+        });
     </script>
 </body>
 </html>
