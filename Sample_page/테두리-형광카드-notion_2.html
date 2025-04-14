@@ -1,0 +1,405 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테두리만 형광 빛 효과 카드 UI</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: transparent;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .main-container {
+            background-color: #000;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .card {
+            position: relative;
+            width: 200px;
+            height: 280px;
+            background-color: rgba(30, 30, 40, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            overflow: visible; /* 빛이 카드 바깥으로 퍼지도록 설정 */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .card-glow {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease, box-shadow 0.3s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .card.blue .card-glow {
+            box-shadow: 0 0 15px 5px rgba(0, 132, 255, 0.3);
+            border: 2px solid rgba(0, 132, 255, 0.7);
+        }
+
+        .card.orange .card-glow {
+            box-shadow: 0 0 15px 5px rgba(255, 130, 10, 0.3);
+            border: 2px solid rgba(255, 130, 10, 0.7);
+        }
+
+        .card.green .card-glow {
+            box-shadow: 0 0 15px 5px rgba(64, 255, 130, 0.3);
+            border: 2px solid rgba(64, 255, 130, 0.7);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card:hover .card-glow {
+            opacity: 1;
+        }
+
+        .blue:hover .card-glow {
+            box-shadow: 0 0 20px 8px rgba(0, 132, 255, 0.6);
+        }
+
+        .orange:hover .card-glow {
+            box-shadow: 0 0 20px 8px rgba(255, 130, 10, 0.6);
+        }
+
+        .green:hover .card-glow {
+            box-shadow: 0 0 20px 8px rgba(64, 255, 130, 0.6);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .blue .card-icon {
+            box-shadow: 0 0 10px rgba(0, 132, 255, 0.5);
+        }
+
+        .orange .card-icon {
+            box-shadow: 0 0 10px rgba(255, 130, 10, 0.5);
+        }
+
+        .green .card-icon {
+            box-shadow: 0 0 10px rgba(64, 255, 130, 0.5);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .card-count {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .blue .card-title, .blue .card-count {
+            color: #0084ff;
+        }
+
+        .orange .card-title, .orange .card-count {
+            color: #ff820a;
+        }
+
+        .green .card-title, .green .card-count {
+            color: #40ff82;
+        }
+
+        .card-text {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* 중국풍 테두리 장식 - 형광 효과 제거 */
+        .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 0;
+            /* 형광 효과 제거를 위해 box-shadow 효과 삭제 */
+        }
+
+        .blue .corner {
+            border-color: #0084ff;
+        }
+
+        .orange .corner {
+            border-color: #ff820a;
+        }
+
+        .green .corner {
+            border-color: #40ff82;
+        }
+
+        /* 코너에 hover 효과 제거 */
+        .card:hover .corner {
+            /* 형광 효과 제거 */
+            box-shadow: none;
+        }
+
+        .corner-top-left {
+            top: 5px;
+            left: 5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-top-right {
+            top: 5px;
+            right: 5px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bottom-left {
+            bottom: 5px;
+            left: 5px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-bottom-right {
+            bottom: 5px;
+            right: 5px;
+            border-left: none;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div style="position: relative; width: 100%; height: auto; margin-top: 20px;">
+            <style>
+                .cards-container {
+                    display: flex;
+                    gap: 30px;
+                    padding: 50px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .card {
+                    position: relative;
+                    width: 200px;
+                    height: 280px;
+                    background-color: rgba(30, 30, 40, 0.8);
+                    border-radius: 10px;
+                    padding: 20px;
+                    color: white;
+                    transition: transform 0.3s ease;
+                    cursor: pointer;
+                    overflow: visible;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    z-index: 1;
+                }
+
+                .card-glow {
+                    position: absolute;
+                    top: -2px;
+                    left: -2px;
+                    right: -2px;
+                    bottom: -2px;
+                    border-radius: 12px;
+                    opacity: 0;
+                    transition: opacity 0.3s ease, box-shadow 0.3s ease;
+                    pointer-events: none;
+                    z-index: -1;
+                }
+
+                .card.blue .card-glow {
+                    box-shadow: 0 0 15px 5px rgba(0, 132, 255, 0.3);
+                    border: 2px solid rgba(0, 132, 255, 0.7);
+                }
+
+                .card.orange .card-glow {
+                    box-shadow: 0 0 15px 5px rgba(255, 130, 10, 0.3);
+                    border: 2px solid rgba(255, 130, 10, 0.7);
+                }
+
+                .card.green .card-glow {
+                    box-shadow: 0 0 15px 5px rgba(64, 255, 130, 0.3);
+                    border: 2px solid rgba(64, 255, 130, 0.7);
+                }
+
+                .card:hover {
+                    transform: translateY(-10px);
+                }
+
+                .card:hover .card-glow {
+                    opacity: 1;
+                }
+
+                .card-icon {
+                    width: 60px;
+                    height: 60px;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    margin-top: 20px;
+                }
+
+                .card-title {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                    text-align: center;
+                }
+
+                .card-count {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                }
+
+                .card-text {
+                    font-size: 14px;
+                    line-height: 1.4;
+                    margin-bottom: 10px;
+                    text-align: center;
+                }
+
+                .corner {
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    border-style: solid;
+                    border-width: 2px;
+                }
+
+                .blue .corner { border-color: #0084ff; }
+                .orange .corner { border-color: #ff820a; }
+                .green .corner { border-color: #40ff82; }
+
+                .corner-top-left {
+                    top: 5px;
+                    left: 5px;
+                    border-right: none;
+                    border-bottom: none;
+                }
+
+                .corner-top-right {
+                    top: 5px;
+                    right: 5px;
+                    border-left: none;
+                    border-bottom: none;
+                }
+
+                .corner-bottom-left {
+                    bottom: 5px;
+                    left: 5px;
+                    border-right: none;
+                    border-top: none;
+                }
+
+                .corner-bottom-right {
+                    bottom: 5px;
+                    right: 5px;
+                    border-left: none;
+                    border-top: none;
+                }
+            </style>
+
+            <div class="cards-container">
+                <!-- 파란색 카드 -->
+                <div class="card blue">
+                    <div class="card-glow"></div>
+                    <div class="corner corner-top-left"></div>
+                    <div class="corner corner-top-right"></div>
+                    <div class="corner corner-bottom-left"></div>
+                    <div class="corner corner-bottom-right"></div>
+                    <div class="card-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#0084ff">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">온돌전</div>
+                    <div class="card-count">50</div>
+                    <div class="card-text">신체 에너지를 사용하여 공격합니다. 30초마다 1회씩 사용 가능합니다.</div>
+                </div>
+
+                <!-- 주황색 카드 -->
+                <div class="card orange">
+                    <div class="card-glow"></div>
+                    <div class="corner corner-top-left"></div>
+                    <div class="corner corner-top-right"></div>
+                    <div class="corner corner-bottom-left"></div>
+                    <div class="corner corner-bottom-right"></div>
+                    <div class="card-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#ff820a">
+                            <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">화염 공격</div>
+                    <div class="card-count">50</div>
+                    <div class="card-text">불의 힘을 이용한 공격입니다. 적에게 화상 효과를 줍니다.</div>
+                </div>
+
+                <!-- 초록색 카드 -->
+                <div class="card green">
+                    <div class="card-glow"></div>
+                    <div class="corner corner-top-left"></div>
+                    <div class="corner corner-top-right"></div>
+                    <div class="corner corner-bottom-left"></div>
+                    <div class="corner corner-bottom-right"></div>
+                    <div class="card-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#40ff82">
+                            <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66 1.5-4.05c.5 1.32 2.45 2.44 3.79 2.44.86 0 1.8-.16 2.58-.91.97-.94 1.38-2.13 1.7-3.36.25-.94.38-1.94.38-2.97 0-1.78-.32-3.34-1.19-4.7M9.64 19.53c-.24.27-.62.29-.94.14-.36-.15-.64-.56-.66-.94-.03-.5.28-1.25.7-1.47.42-.22.73.12.95.41.33.42.35 1.54-.05 1.86m6.42-8.25c.5-.11.47-.45.47-.95 0-.61-.08-1.34-.5-1.8-.35-.4-.76-.36-1.23-.16-.58.25-1.08.77-1.32 1.33-.2.52-.28 1.31.19 1.7.45.4 1.34.23 1.86.07.21-.05.39-.12.53-.19M12 3c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1z"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">자연의 회복</div>
+                    <div class="card-count">50</div>
+                    <div class="card-text">자연의 힘을 빌려 체력을 회복합니다. 60초간 지속됩니다.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
