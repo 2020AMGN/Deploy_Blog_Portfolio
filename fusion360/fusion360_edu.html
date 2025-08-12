@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fusion 360 교육 페이지</title>
+  <style>
+    /* 기본 스타일 (KIT001.html 레이아웃 참고) */
+    :root {
+      --primary: #1976d2;
+      --primary-2: #2196f3;
+      --text: #333;
+      --muted: #666;
+      --bg: #f5f5f5;
+      --card: #ffffff;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'RIDIBatang', 'NEXON Lv2 Gothic', Arial, sans-serif;
+    }
+
+    body {
+      padding: 60px 0 0 0; /* 상단 고정바 여백 느낌 */
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 60px);
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      max-width: 1400px;
+      width: 95%;
+    }
+
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .content-wrapper { grid-template-columns: 1fr; }
+    }
+
+    h1 {
+      margin: 0 0 0.5rem 0;
+      color: var(--primary);
+    }
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .intro {
+      margin: 1rem 0 2rem 0;
+      line-height: 1.8;
+      letter-spacing: -0.01em;
+    }
+
+    /* 섹션 카드 */
+    .section-card {
+      background: #ffffff;
+      border: 1px solid #eaeaea;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 1.25rem 1.25rem 1.5rem;
+      margin: 1rem 0 1.25rem 0;
+    }
+
+    .section-title {
+      display: inline-block;
+      margin: 0 0 0.75rem 0;
+      padding-bottom: 0.35rem;
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      margin: 0.5rem 0 0.75rem 0;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* 버튼 그룹 (KIT 스타일 차용) */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.75rem;
+    }
+    .nav-button {
+      box-sizing: border-box;
+      height: 56px;
+      padding: 0 1.25rem; /* 수직 패딩 제거, 고정 높이로 중앙 정렬 */
+      font-size: 1.05rem;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(145deg, var(--primary-2), var(--primary));
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex; /* 세로 중앙 정렬 */
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      white-space: nowrap; /* 한 줄 고정 */
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 100%;
+    }
+    .nav-button:hover { 
+      background: linear-gradient(145deg, var(--primary), var(--primary-2));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    /* 이미지 슬라이더 (KIT 스타일 차용) */
+    .slider-container {
+      width: 100%;
+      margin: 1rem 0 0.75rem;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      aspect-ratio: 16 / 9;
+    }
+    .slider-item {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.35s ease-in-out;
+      cursor: pointer;
+      background: #f8f9fa;
+    }
+    .slider-item.active { opacity: 1; }
+    .slider-item img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      background: #f8f9fa;
+    }
+    .slider-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 0.25rem 0 0.25rem 0;
+    }
+    .nav-button-slider {
+      background: rgba(255,255,255,0.9);
+      color: var(--primary);
+      border: 1px solid #e9ecef;
+      padding: 0.4rem 0.8rem;
+      font-size: 1.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 48px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+    .nav-button-slider:hover {
+      background: #fff;
+      color: #1565c0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+    .nav-page {
+      color: var(--primary);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #e9ecef;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      min-width: 60px;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      font-weight: 600;
+    }
+
+    /* 슬라이더 오버레이 액션 */
+    .slider-actions {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 8px;
+      z-index: 3;
+    }
+    .action-btn {
+      background: rgba(255,255,255,0.95);
+      color: var(--primary);
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 6px 12px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-family: 'NEXON Lv2 Gothic Medium', 'RIDIBatang', Arial, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      line-height: 1;
+      min-width: 64px;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+    }
+    .action-btn:hover { background:#fff; box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+
+    /* 탭 컨트롤 */
+    .tab-controls { display:flex; gap:0.6rem; margin: 0.5rem 0 1rem; }
+    .tab-button {
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .tab-button.active { background: linear-gradient(145deg, var(--primary-2), var(--primary)); color:#fff; border-color: transparent; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* 썸네일 그리드 */
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .thumb {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .thumb:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
+    .thumb img { width: 100%; height: 110px; object-fit: cover; display: block; }
+    .thumb .thumb-title { padding: 0.6rem 0.75rem; font-size: 0.92rem; color: #444; }
+
+    /* 오른쪽 빠른 링크 패널 */
+    .side-panel {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+      padding: 1rem 1rem 1.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 80px;
+    }
+    .side-panel h3 { margin-top: 0; color: var(--primary); }
+    .link-group + .link-group { margin-top: 1rem; }
+
+    /* 모달 (KIT 스타일 차용) */
+    .modal {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.9); justify-content: center; align-items: center; padding: 20px;
+    }
+    .modal.active { display: flex; }
+    .modal-content { max-width: 90%; max-height: 90vh; position: relative; }
+    .modal-content img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+    .modal-close { position: absolute; top: -40px; right: 0; color: #fff; font-size: 30px; background: none; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <!-- 이미지 모달 -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <img id="modalImage" src="" alt="확대된 이미지" />
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="container">
+      <div class="content-wrapper">
+        <!-- 왼쪽 콘텐츠 -->
+        <div class="left">
+          <h1>기구설계(Fusion360) 교육</h1>
+          <div class="subtitle">🎓 누구나 쉽게! 강력하게! 상상을 현실로만드는 퓨전360 (개발중인 페이지입니다)</div>
+          <div class="intro">
+            이 페이지는 Fusion 360를 학습하기 위한 안내 페이지입니다. 회원가입과 라이선스 등록부터 2D/3D 도면 예제,
+            공식 문서와 실습 영상까지 한 곳에 모았습니다.
+          </div>
+
+          <div class="section-card">
+            <h3 class="section-title">시작하기</h3>
+            <p class="desc">아래 링크를 통해 계정 생성과 로그인, 교육용/개인용 라이선스 등록을 진행하세요.</p>
+            <div class="button-grid">
+              <a class="nav-button" href="https://amugona.notion.site/Fusion360-3D-d69b1778fcee4ea8aa4e1eb64cab8849" target="_blank" rel="noopener">노션: Fusion360 교육 자료</a>
+              <a class="nav-button" href="https://amugona.notion.site/360-21096f70cb38800ba024eddef554f2c1?pvs=74" target="_blank" rel="noopener">회원가입 · 로그인 가이드</a>
+              <a class="nav-button" href="https://file.notion.so/f/f/99d5912e-f0ad-4035-ad93-6de7bcd2bea6/a56ef1a9-8202-47fa-98ac-2b6ff59c2e2c/1%EC%A3%BC%EC%B0%A8_%ED%93%A8%EC%A0%84360_%ED%95%99%EC%83%9D%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4_%EB%93%B1%EB%A1%9D_%EB%B0%8F_%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.pdf?table=block&id=1f572ec4-5a7c-4632-b8be-13946757944f&spaceId=99d5912e-f0ad-4035-ad93-6de7bcd2bea6&expirationTimestamp=1755043200000&signature=Ds0GGkY51xeNHtv5vVeJGXwNHUxLDPd58c16y1U0e9s&downloadName=1%EC%A3%BC%EC%B0%A8+%ED%93%A8%EC%A0%84360+%ED%95%99%EC%83%9D%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4+%EB%93%B1%EB%A1%9D+%EB%B0%8F+%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.pdf" target="_blank" rel="noopener">대학생 라이선스 등록 PDF</a>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3 class="section-title">학습 자료</h3>
+            <p class="desc">기초부터 실전까지, 추천 영상과 블로그 자료로 빠르게 익히세요.</p>
+            <div class="button-grid">
+              <a class="nav-button" href="https://www.youtube.com/watch?v=yUtucFVSGIc" target="_blank" rel="noopener">스터디캐드캠 영상</a>
+              <a class="nav-button" href="https://m.blog.naver.com/studycadcam?categoryNo=104&tab=1" target="_blank" rel="noopener">스터디캐드캠 2D 자료</a>
+              <a class="nav-button" href="https://m.blog.naver.com/studycadcam?categoryNo=103&tab=1" target="_blank" rel="noopener">스터디캐드캠 3D 자료</a>
+            </div>
+          </div>
+
+          
+
+          <!-- 도면 예제: 탭(2D/3D) -->
+          <div class="section-card">
+            <h3 class="section-title">도면 예제</h3>
+            <div class="tab-controls">
+              <button class="tab-button active" data-target="section-2d">2D</button>
+              <button class="tab-button" data-target="section-3d">3D</button>
+            </div>
+
+            <!-- 2D 패널 -->
+            <div id="section-2d" class="tab-panel active">
+              <div class="slider-container" id="slider2d">
+                <div class="slider-item active" data-index="0"><img src="2D-도면-스터디캐드캠-267.png" alt="2D-267" /></div>
+                <div class="slider-item" data-index="1"><img src="2D-도면-스터디캐드캠-244.png" alt="2D-244" /></div>
+                <div class="slider-item" data-index="2"><img src="2D-도면-스터디캐드캠-206.png" alt="2D-206" /></div>
+                <div class="slider-item" data-index="3"><img src="2D-도면-스터디캐드캠-199.png" alt="2D-199" /></div>
+                <div class="slider-item" data-index="4"><img src="2D-도면-스터디캐드캠-171.png" alt="2D-171" /></div>
+                <div class="slider-item" data-index="5"><img src="2D-도면-스터디캐드캠-161.png" alt="2D-161" /></div>
+                <div class="slider-item" data-index="6"><img src="2D-도면-스터디캐드캠-119.png" alt="2D-119" /></div>
+                <div class="slider-item" data-index="7"><img src="2D-도면-스터디캐드캠-39.png" alt="2D-39" /></div>
+                <div class="slider-item" data-index="8"><img src="2D-도면-스터디캐드캠-5.png" alt="2D-5" /></div>
+
+                <div class="slider-actions" data-for="slider2d">
+                  <button class="action-btn zoom" type="button">확대</button>
+                  <a class="action-btn link" href="#" target="_blank" rel="noopener">사이트</a>
+                </div>
+              </div>
+              <div class="slider-nav" data-for="slider2d">
+                <button class="nav-button-slider prev" aria-label="이전">‹</button>
+                <div class="nav-page">1 / 9</div>
+                <button class="nav-button-slider next" aria-label="다음">›</button>
+              </div>
+
+              <div class="thumb-grid">
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220909809213&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-267.png" alt="2D-267" /><div class="thumb-title">2D-267 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220907973870&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-244.png" alt="2D-244" /><div class="thumb-title">2D-244 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220907055334&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-206.png" alt="2D-206" /><div class="thumb-title">2D-206 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220894112606&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-199.png" alt="2D-199" /><div class="thumb-title">2D-199 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220701633844&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-171.png" alt="2D-171" /><div class="thumb-title">2D-171 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220700998884&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-161.png" alt="2D-161" /><div class="thumb-title">2D-161 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220697246506&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-119.png" alt="2D-119" /><div class="thumb-title">2D-119 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220672693739&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-39.png" alt="2D-39" /><div class="thumb-title">2D-39 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220668063677&navType=by" target="_blank" rel="noopener">
+                  <img src="2D-도면-스터디캐드캠-5.png" alt="2D-5" /><div class="thumb-title">2D-5 자세히 보기</div>
+                </a>
+              </div>
+            </div>
+
+            <!-- 3D 패널 -->
+            <div id="section-3d" class="tab-panel">
+              <div class="slider-container" id="slider3d">
+                <div class="slider-item active" data-index="0"><img src="3D-도면-스터디캐드캠-358.png" alt="3D-358" /></div>
+                <div class="slider-item" data-index="1"><img src="3D-도면-스터디캐드캠-55.png" alt="3D-55" /></div>
+                <div class="slider-item" data-index="2"><img src="3D-도면-스터디캐드캠-22.png" alt="3D-22" /></div>
+                <div class="slider-item" data-index="3"><img src="3D-도면-스터디캐드캠-118.png" alt="3D-118" /></div>
+                <div class="slider-item" data-index="4"><img src="3D-도면-스터디캐드캠-63.png" alt="3D-63" /></div>
+
+                <div class="slider-actions" data-for="slider3d">
+                  <button class="action-btn zoom" type="button">확대</button>
+                  <a class="action-btn link" href="#" target="_blank" rel="noopener">사이트</a>
+                </div>
+              </div>
+              <div class="slider-nav" data-for="slider3d">
+                <button class="nav-button-slider prev" aria-label="이전">‹</button>
+                <div class="nav-page">1 / 5</div>
+                <button class="nav-button-slider next" aria-label="다음">›</button>
+              </div>
+
+              <div class="thumb-grid">
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220904547952&navType=by" target="_blank" rel="noopener">
+                  <img src="3D-도면-스터디캐드캠-358.png" alt="3D-358" /><div class="thumb-title">3D-358 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220674538787&navType=by" target="_blank" rel="noopener">
+                  <img src="3D-도면-스터디캐드캠-55.png" alt="3D-55" /><div class="thumb-title">3D-55 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220673260941&navType=by" target="_blank" rel="noopener">
+                  <img src="3D-도면-스터디캐드캠-22.png" alt="3D-22" /><div class="thumb-title">3D-22 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220698278751&navType=by" target="_blank" rel="noopener">
+                  <img src="3D-도면-스터디캐드캠-118.png" alt="3D-118" /><div class="thumb-title">3D-118 자세히 보기</div>
+                </a>
+                <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220675886928&navType=by" target="_blank" rel="noopener">
+                  <img src="3D-도면-스터디캐드캠-63.png" alt="3D-63" /><div class="thumb-title">3D-63 자세히 보기</div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3 class="section-title">3D 패턴 연습</h3>
+            <div class="button-grid">
+              <a class="nav-button" href="https://www.youtube.com/watch?v=yUtucFVSGIc" target="_blank" rel="noopener">패턴 따라하기(기본)</a>
+              <a class="nav-button" href="https://www.youtube.com/watch?v=CxAtffOpu34" target="_blank" rel="noopener">허니콤보 예시 1</a>
+              <a class="nav-button" href="https://www.youtube.com/shorts/hQVVMMyX1tA" target="_blank" rel="noopener">허니콤보 예시 2</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 오른쪽 빠른 링크 -->
+        <div class="right">
+          <div class="side-panel">
+            <h3>빠른 링크</h3>
+            <div class="link-group">
+              <div class="button-grid">
+                <a class="nav-button" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})">맨 위로</a>
+                <a class="nav-button" href="https://amugona.notion.site/Fusion360-3D-d69b1778fcee4ea8aa4e1eb64cab8849" target="_blank" rel="noopener">노션 교육 자료</a>
+                <a class="nav-button" href="https://www.autodesk.co.kr/products/fusion-360/overview" target="_blank" rel="noopener">Fusion 360 공식 홈페이지</a>
+                <a class="nav-button" href="https://www.autodesk.co.kr/products/fusion-360/trial-intake" target="_blank" rel="noopener">개인용/체험판/교육용 선택</a>
+                <a class="nav-button" href="https://www.autodesk.com/kr/products/fusion-360/personal" target="_blank" rel="noopener">개인용 다운로드</a>
+                <a class="nav-button" href="https://help.autodesk.com/view/fusion360/KOR/?guid=GUID-1C665B4D-7BF7-4FDF-98B0-AA7EE12B5AC2" target="_blank" rel="noopener">공식 가이드(KR)</a>
+                <a class="nav-button" href="https://m.blog.naver.com/studycadcam?categoryNo=104&tab=1" target="_blank" rel="noopener">2D 자료 모음</a>
+                <a class="nav-button" href="https://m.blog.naver.com/studycadcam?categoryNo=103&tab=1" target="_blank" rel="noopener">3D 자료 모음</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 공통 모달
+    function openModal(src) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.classList.add('active');
+      modalImg.src = src;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.classList.remove('active');
+      modalImg.src = '';
+      document.body.style.overflow = '';
+    }
+    document.getElementById('imageModal').addEventListener('click', function(e){ if(e.target === this) closeModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+    // 슬라이더 초기화 함수 (KIT001 스타일 변형)
+    function initSlider(containerId) {
+      const container = document.getElementById(containerId);
+      const items = Array.from(container.querySelectorAll('.slider-item'));
+      const nav = document.querySelector('.slider-nav[data-for="' + containerId + '"]');
+      const prevBtn = nav.querySelector('.prev');
+      const nextBtn = nav.querySelector('.next');
+      const page = nav.querySelector('.nav-page');
+      const actions = document.querySelector('.slider-actions[data-for="' + containerId + '"]');
+      const zoomBtn = actions?.querySelector('.zoom');
+      const linkBtn = actions?.querySelector('.link');
+      let current = 0;
+
+      function show(index) {
+        if (index >= items.length) current = 0;
+        else if (index < 0) current = items.length - 1;
+        else current = index;
+        items.forEach((el, i) => el.classList.toggle('active', i === current));
+        page.textContent = (current + 1) + ' / ' + items.length;
+
+        // 현재 슬라이드에 맞는 외부 링크 연결 (있는 경우)
+        if (linkBtn) {
+          let url = null;
+          if (containerId === 'slider2d') {
+            const map = [
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220909809213&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220907973870&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220907055334&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220894112606&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220701633844&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220700998884&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220697246506&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220672693739&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220668063677&navType=by'
+            ];
+            url = map[current] || null;
+          } else if (containerId === 'slider3d') {
+            const map = [
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220904547952&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220674538787&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220673260941&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220698278751&navType=by',
+              'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220675886928&navType=by'
+            ];
+            url = map[current] || null;
+          }
+          if (url) {
+            linkBtn.setAttribute('href', url);
+          }
+        }
+      }
+
+      prevBtn.addEventListener('click', () => show(current - 1));
+      nextBtn.addEventListener('click', () => show(current + 1));
+
+      // 터치 스와이프
+      let startX = 0;
+      container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+      container.addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) diff > 0 ? show(current + 1) : show(current - 1);
+      });
+
+      // 확대 버튼 동작: 현재 이미지로 모달 오픈
+      if (zoomBtn) {
+        zoomBtn.addEventListener('click', () => {
+          const active = container.querySelector('.slider-item.active img');
+          if (active) openModal(active.getAttribute('src'));
+        });
+      }
+
+      show(0);
+    }
+
+    // 두 개의 슬라이더 초기화
+    initSlider('slider2d');
+    initSlider('slider3d');
+
+    // 탭 컨트롤
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const panels = document.querySelectorAll('.tab-panel');
+        panels.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(btn.getAttribute('data-target'));
+        if (target) target.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
+
+
