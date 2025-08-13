@@ -349,15 +349,16 @@
             <!-- 2D 패널 -->
             <div id="section-2d" class="tab-panel active">
               <div class="slider-container" id="slider2d">
-                <div class="slider-item active" data-index="0"><img src="2D-도면-스터디캐드캠-267.png" alt="2D-267" /></div>
-                <div class="slider-item" data-index="1"><img src="2D-도면-스터디캐드캠-244.png" alt="2D-244" /></div>
-                <div class="slider-item" data-index="2"><img src="2D-도면-스터디캐드캠-206.png" alt="2D-206" /></div>
-                <div class="slider-item" data-index="3"><img src="2D-도면-스터디캐드캠-199.png" alt="2D-199" /></div>
-                <div class="slider-item" data-index="4"><img src="2D-도면-스터디캐드캠-171.png" alt="2D-171" /></div>
-                <div class="slider-item" data-index="5"><img src="2D-도면-스터디캐드캠-161.png" alt="2D-161" /></div>
-                <div class="slider-item" data-index="6"><img src="2D-도면-스터디캐드캠-119.png" alt="2D-119" /></div>
-                <div class="slider-item" data-index="7"><img src="2D-도면-스터디캐드캠-39.png" alt="2D-39" /></div>
-                <div class="slider-item" data-index="8"><img src="2D-도면-스터디캐드캠-5.png" alt="2D-5" /></div>
+                  <div class="slider-item active" data-index="0"><img src="2D-도면-상상을현실로-1.png" alt="2D-상상을현실로-1" /></div>
+                  <div class="slider-item" data-index="1"><img src="2D-도면-스터디캐드캠-267.png" alt="2D-267" /></div>
+                  <div class="slider-item" data-index="2"><img src="2D-도면-스터디캐드캠-244.png" alt="2D-244" /></div>
+                  <div class="slider-item" data-index="3"><img src="2D-도면-스터디캐드캠-206.png" alt="2D-206" /></div>
+                  <div class="slider-item" data-index="4"><img src="2D-도면-스터디캐드캠-199.png" alt="2D-199" /></div>
+                  <div class="slider-item" data-index="5"><img src="2D-도면-스터디캐드캠-171.png" alt="2D-171" /></div>
+                  <div class="slider-item" data-index="6"><img src="2D-도면-스터디캐드캠-161.png" alt="2D-161" /></div>
+                  <div class="slider-item" data-index="7"><img src="2D-도면-스터디캐드캠-119.png" alt="2D-119" /></div>
+                  <div class="slider-item" data-index="8"><img src="2D-도면-스터디캐드캠-39.png" alt="2D-39" /></div>
+                  <div class="slider-item" data-index="9"><img src="2D-도면-스터디캐드캠-5.png" alt="2D-5" /></div>
 
                 <div class="slider-actions" data-for="slider2d">
                   <button class="action-btn zoom" type="button">확대</button>
@@ -371,6 +372,10 @@
               </div>
 
               <div class="thumb-grid">
+                <div class="thumb">
+                  <img src="2D-도면-상상을현실로-1.png" alt="2D-상상을현실로-1" />
+                  <div class="thumb-title">2D-상상을현실로-1</div>
+                </div>
                 <a class="thumb" href="https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220909809213&navType=by" target="_blank" rel="noopener">
                   <img src="2D-도면-스터디캐드캠-267.png" alt="2D-267" /><div class="thumb-title">2D-267 자세히 보기</div>
                 </a>
@@ -517,6 +522,7 @@
           let url = null;
           if (containerId === 'slider2d') {
             const map = [
+              null,
               'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220909809213&navType=by',
               'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220907973870&navType=by',
               'https://m.blog.naver.com/PostView.naver?blogId=studycadcam&logNo=220907055334&navType=by',
@@ -540,6 +546,10 @@
           }
           if (url) {
             linkBtn.setAttribute('href', url);
+            linkBtn.style.display = 'inline-flex';
+          } else {
+            linkBtn.removeAttribute('href');
+            linkBtn.style.display = 'none';
           }
         }
       }
